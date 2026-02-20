@@ -1,0 +1,23 @@
+# OS-specific
+.DS_Store
+
+# Gemini CLI specific
+.gemini/
+*.skill
+
+# .skills - Ignore picked-up skills by source prefix
+.skills/official-*
+.skills/org-*
+.skills/3rdparty-*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Local configuration
+.env

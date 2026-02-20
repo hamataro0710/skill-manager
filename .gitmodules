@@ -1,9 +1,9 @@
-[submodule ".officials/gemini-skills"]
-	path = .officials/gemini-skills
+[submodule "officials/gemini-skills"]
+	path = officials/gemini-skills
 	url = https://github.com/google-gemini/gemini-skills
-[submodule ".officials/claude-skills"]
-	path = .officials/claude-skills
+[submodule "officials/claude-skills"]
+	path = officials/claude-skills
 	url = https://github.com/anthropics/skills
-[submodule ".officials/openai-skills"]
-	path = .officials/openai-skills
+[submodule "officials/openai-skills"]
+	path = officials/openai-skills
 	url = https://github.com/openai/skills

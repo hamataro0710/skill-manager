@@ -7,3 +7,6 @@
 [submodule "officials/openai-skills"]
 	path = officials/openai-skills
 	url = https://github.com/openai/skills
+[submodule "officials/microsoft-skills"]
+	path = officials/microsoft-skills
+	url = https://github.com/microsoft/skills

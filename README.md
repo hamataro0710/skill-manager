@@ -57,3 +57,20 @@ python tools/setup-project.py --repo {your-project-path} --name "My Project"
 
 ## 🚀 セットアップ (Getting Started)
 このリポジトリは外部の公式リポジトリをサブモジュールとして参照しているため、`--recursive` オプションを使用したクローンが必要です。
+
+### 導入後のプロジェクト構成例
+`tools/setup-project.py` を実行すると、ターゲットとなるプロジェクトは以下のような構成になり、単一のスキル実体を複数のエージェントから参照できるようになります。
+
+```text
+{your-project}
+├── PROJECT_RULES.md         # [実体] 全エージェント共通のルール
+├── AGENTS.md                # PROJECT_RULES.md へのリンク
+├── CLAUDE.md                # PROJECT_RULES.md へのリンク
+├── .skills/                 # [実体] スキル定義（ここを編集すると全エージェントに反映）
+│   └── {picked-skill}/
+├── .agents/
+│   └── skills/              # .skills/ へのリンク
+├── .claude/
+│   └── skills/              # .skills/ へのリンク
+└── {your-files}
+```

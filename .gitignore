@@ -21,3 +21,5 @@ ENV/
 
 # Local configuration
 .env
+.skills/ASSET_DIFF.md
+.skills/ACTIVE_ASSETS.md

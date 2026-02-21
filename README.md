@@ -18,7 +18,7 @@ The pace of AI development is staggering, making it increasingly difficult to ke
 ```text
 .
 ├── core/                # [Entity] Core assets of Skill-Manager itself (Tools, Skills, etc.)
-│   ├── skills/          # Built-in skills (e.g., skill-picker, plan-navigator)
+│   ├── skills/          # Built-in skills (e.g., asset-consultant, plan-navigator)
 │   ├── tools/           # Management scripts
 │   └── blueprints/      # Templates for project-specific configurations
 ├── .skills/             # [Entity] Actual content of skills picked up for the project

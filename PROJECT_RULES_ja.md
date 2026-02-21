@@ -28,7 +28,7 @@ This file is the single source of truth for all AI agents working on this projec
 
 ## 📂 Directory Roles
 - `core/`: **[実体]** Skill-Manager 自体のコア資産（ツール、スキル、テンプレート）。
-  - `core/skills/`: 組み込みスキル（`skill-picker` 等）の実体。
+  - `core/skills/`: 組み込みスキル（`asset-consultant` 等）の実体。
   - `core/tools/`: 管理用スクリプト（`import-skill.py` 等）の実体。
   - `core/blueprints/`: 構成テンプレート（`PROJECT_RULES.md` 等）の実体。
 - `.skills/`: **[実体]** プロジェクト固有、または Pickup したスキルの実体（コアスキルへのリンクを含む）。

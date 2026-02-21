@@ -18,7 +18,7 @@ AI開発の速度は凄まじく、個人の努力だけで最新のスキル定
 ```text
 .
 ├── core/                # [実体] Skill-Manager 自体のコア資産 (Tools, Skills, etc.)
-│   ├── skills/          # 組み込みスキルの実体 (skill-picker)
+│   ├── skills/          # 組み込みスキルの実体 (asset-consultant)
 │   ├── tools/           # 管理用スクリプトの実体
 │   └── blueprints/      # 各プロジェクト用設定の雛形
 ├── .skills/             # [実体] プロジェクトで Pickup したスキルの実体

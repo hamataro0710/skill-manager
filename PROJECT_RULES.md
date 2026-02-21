@@ -28,7 +28,7 @@ Agents must follow these guidelines:
 
 ## 📂 Directory Roles
 - `core/`: **[Entity]** Core assets of Skill-Manager itself (tools, skills, templates).
-  - `core/skills/`: Entities for built-in skills (e.g., `skill-picker`, `plan-navigator`).
+  - `core/skills/`: Entities for built-in skills (e.g., `asset-consultant`, `plan-navigator`).
   - `core/tools/`: Entities for management scripts (e.g., `import-skill.py`).
   - `core/blueprints/`: Entities for configuration templates (e.g., `PROJECT_RULES.md`).
 - `.skills/`: **[Entity]** Project-specific or picked-up skill entities (including links to core skills).

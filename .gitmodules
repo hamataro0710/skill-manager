@@ -1,12 +1,39 @@
-[submodule "officials/gemini-skills"]
-	path = officials/gemini-skills
+[submodule "officials/skills-gemini"]
+	path = officials/skills-gemini
 	url = https://github.com/google-gemini/gemini-skills
-[submodule "officials/claude-skills"]
-	path = officials/claude-skills
+[submodule "officials/skills-anthropic"]
+	path = officials/skills-anthropic
 	url = https://github.com/anthropics/skills
-[submodule "officials/openai-skills"]
-	path = officials/openai-skills
+[submodule "officials/skills-openai"]
+	path = officials/skills-openai
 	url = https://github.com/openai/skills
-[submodule "officials/microsoft-skills"]
-	path = officials/microsoft-skills
+[submodule "officials/skills-microsoft"]
+	path = officials/skills-microsoft
 	url = https://github.com/microsoft/skills
+[submodule "officials/mcp-modelcontext"]
+	path = officials/mcp-modelcontext
+	url = https://github.com/modelcontextprotocol/servers
+[submodule "officials/mcp-google"]
+	path = officials/mcp-google
+	url = https://github.com/google/mcp
+[submodule "3rdparty/mcp-smithery"]
+	path = 3rdparty/mcp-smithery
+	url = https://github.com/smithery-ai/mcp-servers
+[submodule "3rdparty/awesome-claude-code"]
+	path = 3rdparty/awesome-claude-code
+	url = https://github.com/hesreallyhim/awesome-claude-code
+[submodule "officials/agents-openai-swarm"]
+	path = officials/agents-openai-swarm
+	url = https://github.com/openai/swarm
+[submodule "officials/agents-microsoft-autogen"]
+	path = officials/agents-microsoft-autogen
+	url = https://github.com/microsoft/autogen
+[submodule "officials/agents-anthropic-samples"]
+	path = officials/agents-anthropic-samples
+	url = https://github.com/anthropics/anthropic-cookbook
+[submodule "officials/agents-langchain"]
+	path = officials/agents-langchain
+	url = https://github.com/langchain-ai/langgraph
+[submodule "officials/agents-llamaindex"]
+	path = officials/agents-llamaindex
+	url = https://github.com/run-llama/llama_index

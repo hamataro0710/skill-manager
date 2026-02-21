@@ -1,76 +1,75 @@
 # Skill-Manager
 
-**組織内の複数AIエージェントの管理を共通化し、公式・社内スキルの配布とメンテナンスを効率化するための管理フレームワーク**
+**A management framework for unifying AI agent assets (skills, tools, and configurations) across organizations, streamlining the distribution and maintenance of official and internal skills.**
 
-## 🌟 ビジョン (Vision)
+## 🌟 Vision
 
-AI開発の速度は凄まじく、個人の努力だけで最新のスキル定義やツールセットに追従し続けることは困難になりつつあります。また、ユーザーごとに好みのAIエージェント（Gemini, Claude, Codex等）は異なりますが、それぞれが要求する微細なディレクトリ構造やパスの違いが、資産の再利用を妨げる壁となっています。
+The pace of AI development is staggering, making it increasingly difficult to keep up with the latest skill definitions and toolsets through individual effort alone. Furthermore, while users favor different AI agents (Gemini, Claude, Codex, etc.), the subtle differences in directory structures and paths required by each create barriers to asset reuse.
 
-`Skill-Manager` は、これらの差異を抽象化して吸収し、**「個人の好みのエージェントを使い分けつつ、組織の知見をシームレスに共有・再利用できる環境」**を提供します。
+`Skill-Manager` abstracts and absorbs these differences, providing an environment where **"users can use their preferred agent while seamlessly sharing and reusing organizational knowledge."**
 
-### 核心となる価値
-1.  **Anti-Fragmentation (断片化の防止)**: エージェントごとの微細なパスの違い（`.agents/`, `.claude/`等）をシンボリックリンク層で吸収し、一つのスキル定義をあらゆるエージェントで使い回せるようにします。
-2.  **Maintenance-First Architecture (メンテナンス重視の構成)**: 複雑なツールやUIを提供することよりも、「どのスキルが信頼できるか」「どう維持管理するか」という構造（Architecture）の提供を優先します。
-3.  **Collaborative Defense (組織による追従)**: 公式リポジトリ（Google, Anthropic, OpenAI等）をサブモジュールとして統合し、セキュリティ懸念のない「認定済み公式資産」をチームで効率的に選定（Pickup）できる状態を維持します。
+### Core Values
+1.  **Anti-Fragmentation**: Absorbs subtle path differences (e.g., `.agents/`, `.claude/`) through a symbolic link layer, allowing a single skill definition to be used across all agents.
+2.  **Maintenance-First Architecture**: Prioritizes providing a structure (Architecture) for "which skills are trustworthy" and "how to maintain them" over providing complex tools or UIs.
+3.  **Collaborative Defense**: Integrates official repositories (Google, Anthropic, OpenAI, etc.) as submodules, maintaining a state where teams can efficiently select (pickup) "certified official assets" without security concerns.
 
-## 📂 ディレクトリ構成 (Structure)
+## 📂 Directory Structure
 
 ```text
 .
-├── core/                # [実体] Skill-Manager 自体のコア資産 (Tools, Skills, etc.)
-│   ├── skills/          # 組み込みスキルの実体 (skill-picker)
-│   ├── tools/           # 管理用スクリプトの実体
-│   └── blueprints/      # 各プロジェクト用設定の雛形
-├── .skills/             # [実体] プロジェクトで Pickup したスキルの実体
-├── tools/               # core/tools へのシンボリックリンク
-├── .agents/skills/      # Gemini CLI 用窓口 (../.skills へのリンク)
-├── .claude/skills/      # Claude Code 用窓口 (../.skills へのリンク)
-├── org/skills/          # 組織内 (社内・チーム内) で共通利用・配布するスキル
-├── 3rdparty/{repo}/     # サードパーティの各リポジトリ (Git Submodules 等)
-├── officials/           # 各社の公式リポジトリ (Git Submodules)
+├── core/                # [Entity] Core assets of Skill-Manager itself (Tools, Skills, etc.)
+│   ├── skills/          # Built-in skills (e.g., skill-picker, plan-navigator)
+│   ├── tools/           # Management scripts
+│   └── blueprints/      # Templates for project-specific configurations
+├── .skills/             # [Entity] Actual content of skills picked up for the project
+├── tools/               # Symbolic link to core/tools
+├── .agents/skills/      # Interface for Gemini CLI (Link to ../.skills)
+├── .claude/skills/      # Interface for Claude Code (Link to ../.skills)
+├── org/skills/          # Skills shared and distributed within the organization
+├── 3rdparty/{repo}/     # Third-party repositories (Git Submodules, etc.)
+├── officials/           # Official repositories from various companies (Git Submodules)
 └── README.md
 ```
 
-## 🚀 ロードマップ (Roadmap)
-- [x] **Multi-Agent Support**: Gemini, Claude, Codex(OpenAI) の最低ラインの対応。
-- [ ] **Personality Extension**: 特定の役割（人格）を持つ Sub-agent の定義を共通化し、配布可能にする。
-- [ ] **Skill Discovery**: 膨大な公式スキル群から、用途に最適なものをより容易に選定できる仕組みの強化。
-- [ ] **Organizational Templates**: `org/skills/` 配下で、社内標準のプロンプトや命名規則を自動適用するテンプレート。
+## 🚀 Roadmap
+- [x] **Multi-Agent Support**: Baseline support for Gemini, Claude, and Codex (OpenAI).
+- [ ] **Personality Extension**: Unifying and making sub-agent definitions with specific roles (personalities) distributable.
+- [ ] **Skill Discovery**: Strengthening the mechanism for easily selecting the most suitable official skills for specific tasks.
+- [ ] **Organizational Templates**: Templates under `org/skills/` that automatically apply internal standard prompts and naming conventions.
 
-## ✨ 組織導入のメリット
-- **シングル・ソース・オブ・トゥルース**: スキルの実体はすべて中立的な `.skills/` で管理され、各エージェント（`.agents/`, `.claude/`）からはリンクを貼るだけです。
-- **指示書の一元化**: `AGENTS.md` や `CLAUDE.md` を `PROJECT_RULES.md` へのリンクにすることで、エージェントを問わず一貫した振る舞いを保証します。
-- **ポータビリティ**: `org/skills/` に定義された社内共通ツールは、どのプロジェクトでも同じコマンドで即座に導入可能です。
+## ✨ Benefits of Organizational Adoption
+- **Single Source of Truth**: All skill entities are managed in a neutral `.skills/` directory, with links from each agent's specific directory (`.agents/`, `.claude/`).
+- **Unified Instructions**: By linking `AGENTS.md` and `CLAUDE.md` to `PROJECT_RULES.md`, consistent behavior is guaranteed regardless of the agent.
+- **Portability**: Internal common tools defined in `org/skills/` can be instantly deployed in any project using the same command.
 
-**一元管理のセットアップ:**
+## 🏷️ Skill Naming Convention
+To avoid conflicts and clarify origins, we recommend managing skills using the following format:
+`{source}-{repo_name}-{skill_name}`
+
+- **Example**: `official-skills-anthropic-mcp-builder` (Distributed from official source)
+- **Example**: `org-internal-security-audit` (Common within organization)
+- **Example**: `3rdparty-awesome-tools-translator` (External repository)
+
+## 🚀 Getting Started
+Since this repository refers to external official repositories as submodules, cloning with the `--recursive` option is required.
+
+### Example Post-Import Project Structure
+By running `tools/setup-project.py`, the target project will be configured so that a single skill entity can be referenced from multiple agents.
+**Unified Setup:**
 ```bash
 python tools/setup-project.py --repo {your-project-path} --name "My Project"
 ```
 
-## 🏷️ スキル命名規則 (Naming Convention)
-組織全体でスキルの衝突を避け、出自を明確にするために、以下の形式で管理することを推奨しています。
-`{source}-{repo_name}-{skill_name}`
-
-- **例**: `official-claude-skills-mcp-builder` (公式からの配布)
-- **例**: `org-internal-security-audit` (組織内共通)
-- **例**: `3rdparty-awesome-tools-translator` (外部リポジトリ)
-
-## 🚀 セットアップ (Getting Started)
-このリポジトリは外部の公式リポジトリをサブモジュールとして参照しているため、`--recursive` オプションを使用したクローンが必要です。
-
-### 導入後のプロジェクト構成例
-`tools/setup-project.py` を実行すると、ターゲットとなるプロジェクトは以下のような構成になり、単一のスキル実体を複数のエージェントから参照できるようになります。
-
 ```text
 {your-project}
-├── PROJECT_RULES.md         # [実体] 全エージェント共通のルール
-├── AGENTS.md                # PROJECT_RULES.md へのリンク
-├── CLAUDE.md                # PROJECT_RULES.md へのリンク
-├── .skills/                 # [実体] スキル定義（ここを編集すると全エージェントに反映）
+├── PROJECT_RULES.md         # [Entity] Common rules for all agents
+├── AGENTS.md                # Link to PROJECT_RULES.md
+├── CLAUDE.md                # Link to PROJECT_RULES.md
+├── .skills/                 # [Entity] Skill definitions (editing here reflects in all agents)
 │   └── {picked-skill}/
 ├── .agents/
-│   └── skills/              # .skills/ へのリンク
+│   └── skills/              # Link to .skills/
 ├── .claude/
-│   └── skills/              # .skills/ へのリンク
+│   └── skills/              # Link to .skills/
 └── {your-files}
 ```

@@ -4,42 +4,47 @@ This file is the single source of truth for all AI agents working on this projec
 
 ## 📖 Project Overview
 - **Name**: Skill-Manager
-- **Description**: AIエージェントの資産（スキル、ツール、設定）を一元管理するためのフレームワーク。
+- **Description**: A framework for unifying AI agent assets (skills, tools, and configurations).
 - **Core Principle**: **"Agent-Neutral & Minimal Pollution"**
-  - 特定のツール固有の隠しディレクトリ（`.gemini/`, `.claude/` 等）を最小限に抑え、可能な限り共通の標準ディレクトリ構造で資産を管理します。
+  - Minimize hidden directories specific to particular tools (e.g., `.gemini/`, `.claude/`) and prioritize managing assets within a common standard directory structure.
 
 ## 🤖 Agent Behavior Guidelines
-エージェントは以下のガイドラインに従って行動してください。
+Agents must follow these guidelines:
 
-### 1. ツール固有フォルダの生成禁止
-- 新しいツールを導入する際、ツール独自の `.xxx/` フォルダを安易に作成しないでください。
-- 既存の `.skills/`, `tools/`, `blueprints/` などの共通フォルダに機能を統合することを優先してください。
+### 1. Prohibition of Tool-Specific Folders
+- When introducing a new tool, do not create tool-specific `.xxx/` folders without careful consideration.
+- Prioritize integrating functions into existing common folders like `.skills/`, `tools/`, and `blueprints/`.
 
-### 2. シングル・ソース・オブ・トゥルース（SSoT）の維持
-- `AGENTS.md`, `CLAUDE.md`, `COPILOT.md` 等は、常に `PROJECT_RULES.md` へのシンボリックリンクとしてください。
-- 設定の変更は必ず `PROJECT_RULES.md` に対して行い、個別の設定ファイルを書き換えてはいけません。
+### 2. Maintain Single Source of Truth (SSoT)
+- Always make `AGENTS.md`, `CLAUDE.md`, `COPILOT.md`, etc., symbolic links to `PROJECT_RULES.md`.
+- Changes to settings must be made to `PROJECT_RULES.md`, and individual configuration files must not be modified directly.
 
-### 3. 中立的なパス参照
-- スキルの実体は常に `.skills/` 直下を参照してください。
-- エージェント固有のパス（`.agents/skills/` 等）を「実体」として認識したり、そこへ直接ファイルを書き込んだりしないでください。
+### 3. Neutral Path Reference
+- Skill entities should always be referenced under the `.skills/` directory.
+- Do not recognize agent-specific paths (e.g., `.agents/skills/`) as "entities" or write files directly into them.
 
-### 4. シンボリックリンクによる相互運用
-- 複数のツールで同じファイルを共有する場合、コピーではなくシンボリックリンク（相対パス）を活用してください。
+### 4. Interoperability via Symbolic Links
+- When sharing the same file across multiple tools, use symbolic links (relative paths) instead of copies.
 
 ## 📂 Directory Roles
-- `core/`: **[実体]** Skill-Manager 自体のコア資産（ツール、スキル、テンプレート）。
-  - `core/skills/`: 組み込みスキル（`skill-picker` 等）の実体。
-  - `core/tools/`: 管理用スクリプト（`import-skill.py` 等）の実体。
-  - `core/blueprints/`: 構成テンプレート（`PROJECT_RULES.md` 等）の実体。
-- `.skills/`: **[実体]** プロジェクト固有、または Pickup したスキルの実体（コアスキルへのリンクを含む）。
-- `tools/`: `core/tools/` へのショートカット（シンボリックリンク）。
-- `officials/`, `org/`, `3rdparty/`: スキル供給源。
+- `core/`: **[Entity]** Core assets of Skill-Manager itself (tools, skills, templates).
+  - `core/skills/`: Entities for built-in skills (e.g., `skill-picker`, `plan-navigator`).
+  - `core/tools/`: Entities for management scripts (e.g., `import-skill.py`).
+  - `core/blueprints/`: Entities for configuration templates (e.g., `PROJECT_RULES.md`).
+- `.skills/`: **[Entity]** Project-specific or picked-up skill entities (including links to core skills).
+- `tools/`: Shortcut (symbolic link) to `core/tools/`.
+- `officials/`, `org/`, `3rdparty/`: **[Source]** Collections of skill entities managed via git submodules.
+  - Directories must follow the `{category}-{vendor}` naming convention for easy discovery:
+    - `agents-*`: Frameworks for multi-agent orchestration, task handoffs, and agent logic (e.g., `agents-langchain`, `agents-microsoft-autogen`).
+    - `mcp-*`: Real tool implementations using the Model Context Protocol (e.g., `mcp-modelcontext`, `mcp-google`).
+    - `skills-*`: Guides, prompt collections, and behavioral configurations for specific AI models (e.g., `skills-anthropic`, `skills-gemini`).
+    - `blueprints-*`: Templates for project structures and configurations.
 
 ## 🛠 Operation Workflows
-- **Sync**: `git submodule update` を使用。
-- **Import**: `tools/import-skill.py` を介して `.skills/` へ。
-- **Apply**: `tools/setup-project.py` を介して他プロジェクトへリンクを張る。
+- **Sync**: Use `git submodule update`.
+- **Import**: Via `tools/import-skill.py` into `.skills/`.
+- **Apply**: Via `tools/setup-project.py` to link into other projects.
 
 ## ✍️ Coding Standards
-- **Naming**: `{source}-{repo}-{skill_name}` を遵守。
-- **Portability**: ツール固有の絶対パスをハードコードせず、プロジェクトルートからの相対パスを使用する。
+- **Naming**: Follow `{source}-{repo}-{skill_name}`.
+- **Portability**: Do not hardcode absolute paths specific to any tool; use relative paths from the project root.

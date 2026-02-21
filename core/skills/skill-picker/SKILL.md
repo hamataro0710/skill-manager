@@ -1,46 +1,46 @@
 ---
 name: skill-picker
-description: 各ディレクトリ（core, officials, org, 3rdparty）から最適な AI スキルを選定し、指定したプロジェクトへ「実体（.skills/）」と「リンク（.agents/, .claude/）」の構造でインポートします。
+description: Selects the best AI skills from various directories (core, officials, org, 3rdparty) and imports them with a structure of "Entity (.skills/)" and "Links (.agents/, .claude/)".
 ---
 
 # Skill Picker
 
-このスキルは、各種ソース（公式、組織内、サードパーティ、組み込み）からユーザーの要件に合うスキルを探し出し、プロジェクトに統合するプロセスを自動化します。
+This skill automates the process of finding and integrating skills that match user requirements from various sources (official, internal org, third-party, built-in).
 
-## ワークフロー
+## Workflow
 
-1. **検索 (Search)**:
-   - 以下のディレクトリを探索し、要件に合致する `SKILL.md` やディレクトリを探します。
-     - `core/skills/` (Skill-Manager 組み込み)
-     - `officials/` (公式)
-     - `org/skills/` (組織内共有)
-     - `3rdparty/` 配下の各リポジトリ
-2. **提案 (Propose)**:
-   - 見つかったスキルの一覧と、それらがなぜ推奨されるかの理由を提示します。
-3. **インポート (Import)**:
-   - ユーザーが選択したスキルを `tools/import-skill.py` を使用してインポートします。
-   - **命名規則**: `--name` 引数には `{source}-{repo}-{skill_name}` の形式を指定することを推奨します。
+1. **Search**:
+   - Explores the following directories to find `SKILL.md` or directories matching requirements:
+     - `core/skills/` (Skill-Manager built-in)
+     - `officials/` (Official)
+     - `org/skills/` (Internal Organization)
+     - `3rdparty/` (Third-party repositories)
+2. **Propose**:
+   - Presents a list of found skills and reasons for recommendation.
+3. **Import**:
+   - Imports the selected skill using `tools/import-skill.py`.
+   - **Naming Convention**: Use the format `{source}-{repo}-{skill_name}` for the `--name` argument.
 
-## 実行コマンド
+## Command Execution
 
 ```bash
-# 例: gemini-skills から画像検索スキルをインポートする場合
-python3 tools/import-skill.py \
-  --source officials/gemini-skills/skills/image-search \
-  --repo . \
-  --name official-gemini-skills-image-search
+# Example: Importing an image-search skill from gemini-skills
+python3 tools/import-skill.py 
+  --source officials/skills-gemini/skills/image-search 
+  --repo . 
+  --name official-skills-gemini-image-search
 ```
 
-### インポート後の構造
-インポートが完了すると、ターゲットプロジェクトは以下の構成になります。
+### Post-Import Structure
+Once imported, the target project will have the following structure:
 
 ```text
 {target-repo}
-├── .skills/<name>         (Entity: 実体)
-├── .agents/skills/        (Link: ../.skills へのリンク)
-└── .claude/skills/        (Link: ../.skills へのリンク)
+├── .skills/<name>         (Entity: Actual content)
+├── .agents/skills/        (Link: Relative link to ../.skills)
+└── .claude/skills/        (Link: Relative link to ../.skills)
 ```
 
-## 注意事項
-- シンボリックリンクは相対パスで作成されるため、リポジトリを移動してもリンクが維持されます。
-- 同名のスキルが既に存在する場合、上書きの確認をユーザーに行ってください。
+## Precautions
+- Symbolic links are created with relative paths, so they remain valid even if the repository is moved.
+- If a skill with the same name already exists, confirm with the user before overwriting.

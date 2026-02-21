@@ -1,16 +1,17 @@
 # Skill-Manager
 
-**組織内の複数AIエージェント（Gemini, Claude等）の管理を共通化し、公式・社内・組織内スキルの配布とメンテナンスを効率化するための管理フレームワーク**
+**組織内の複数AIエージェントの管理を共通化し、公式・社内スキルの配布とメンテナンスを効率化するための管理フレームワーク**
 
-## 📖 概要 (Overview)
+## 🌟 ビジョン (Vision)
 
-AIエージェントの導入が進む組織において、「エージェントごとに異なるツール定義」や「開発チームごとの車輪の再発明」が大きな管理コストとなっています。
+AI開発の速度は凄まじく、個人の努力だけで最新のスキル定義やツールセットに追従し続けることは困難になりつつあります。また、ユーザーごとに好みのAIエージェント（Gemini, Claude, Codex等）は異なりますが、それぞれが要求する微細なディレクトリ構造やパスの違いが、資産の再利用を妨げる壁となっています。
 
-このリポジトリは、各社の公式リポジトリを **Submodules** として一元管理し、さらに組織独自（Internal）のスキルを共通化することで、以下の価値を提供します：
+`Skill-Manager` は、これらの差異を抽象化して吸収し、**「個人の好みのエージェントを使い分けつつ、組織の知見をシームレスに共有・再利用できる環境」**を提供します。
 
-1.  **Multi-Agent Efficiency (複数エージェントの効率化)**: Gemini CLI (`.agents/`) と Claude Code (`.claude/`) など、異なるエージェント間で同じスキル定義をシンボリックリンクで共有。一箇所の修正がすべてのエージェントに即座に反映されます。
-2.  **Organizational Standardization (組織標準化)**: `org/skills/` を通じて、社内共通のプロンプトエンジニアリング、命名規則、セキュリティポリシーを適用した「認定スキル」を各プロジェクトへ迅速に配布します。
-3.  **Latest Catch-up (公式追従)**: 膨大な公式スキル群（OpenAI, Google, Anthropic等）を常に同期し、プロジェクト要件にマッチする最適な機能を検索・選定（Pickup）できる状態を維持します。
+### 核心となる価値
+1.  **Anti-Fragmentation (断片化の防止)**: エージェントごとの微細なパスの違い（`.agents/`, `.claude/`等）をシンボリックリンク層で吸収し、一つのスキル定義をあらゆるエージェントで使い回せるようにします。
+2.  **Maintenance-First Architecture (メンテナンス重視の構成)**: 複雑なツールやUIを提供することよりも、「どのスキルが信頼できるか」「どう維持管理するか」という構造（Architecture）の提供を優先します。
+3.  **Collaborative Defense (組織による追従)**: 公式リポジトリ（Google, Anthropic, OpenAI等）をサブモジュールとして統合し、セキュリティ懸念のない「認定済み公式資産」をチームで効率的に選定（Pickup）できる状態を維持します。
 
 ## 📂 ディレクトリ構成 (Structure)
 
@@ -21,7 +22,6 @@ AIエージェントの導入が進む組織において、「エージェント
 │   ├── tools/           # 管理用スクリプトの実体
 │   └── blueprints/      # 各プロジェクト用設定の雛形
 ├── .skills/             # [実体] プロジェクトで Pickup したスキルの実体
-│   └── skill-picker/    # core/skills/skill-picker へのリンク
 ├── tools/               # core/tools へのシンボリックリンク
 ├── .agents/skills/      # Gemini CLI 用窓口 (../.skills へのリンク)
 ├── .claude/skills/      # Claude Code 用窓口 (../.skills へのリンク)
@@ -31,50 +31,29 @@ AIエージェントの導入が進む組織において、「エージェント
 └── README.md
 ```
 
-### ✨ 組織導入のメリット：メンテナンスの効率化
-本フレームワークでは、エージェントごとの設定を個別にメンテナンスする必要はありません。
+## 🚀 ロードマップ (Roadmap)
+- [x] **Multi-Agent Support**: Gemini, Claude, Codex(OpenAI) の最低ラインの対応。
+- [ ] **Personality Extension**: 特定の役割（人格）を持つ Sub-agent の定義を共通化し、配布可能にする。
+- [ ] **Skill Discovery**: 膨大な公式スキル群から、用途に最適なものをより容易に選定できる仕組みの強化。
+- [ ] **Organizational Templates**: `org/skills/` 配下で、社内標準のプロンプトや命名規則を自動適用するテンプレート。
 
+## ✨ 組織導入のメリット
 - **シングル・ソース・オブ・トゥルース**: スキルの実体はすべて中立的な `.skills/` で管理され、各エージェント（`.agents/`, `.claude/`）からはリンクを貼るだけです。
-- **指示書の一元化**: プロジェクトの基本ルール（`PROJECT_RULES.md`）を `AGENTS.md` や `CLAUDE.md` から参照させることで、エージェントの種類を問わず一貫した振る舞いを保証します。
-- **スキルのポータビリティ**: `org/skills/` に定義された社内共通ツールは、どのプロジェクトでも同じコマンド（`python tools/import-skill.py`）で即座に導入可能です。
+- **指示書の一元化**: `AGENTS.md` や `CLAUDE.md` を `PROJECT_RULES.md` へのリンクにすることで、エージェントを問わず一貫した振る舞いを保証します。
+- **ポータビリティ**: `org/skills/` に定義された社内共通ツールは、どのプロジェクトでも同じコマンドで即座に導入可能です。
 
 **一元管理のセットアップ:**
 ```bash
 python tools/setup-project.py --repo {your-project-path} --name "My Project"
 ```
-実行後、ターゲットプロジェクトには以下のリンクが自動作成され、複数エージェント対応が即座に完了します：
-- `AGENTS.md` -> `PROJECT_RULES.md`
-- `CLAUDE.md` -> `PROJECT_RULES.md`
 
-### 🏷️ スキル命名規則 (Naming Convention)
+## 🏷️ スキル命名規則 (Naming Convention)
 組織全体でスキルの衝突を避け、出自を明確にするために、以下の形式で管理することを推奨しています。
-
 `{source}-{repo_name}-{skill_name}`
 
 - **例**: `official-claude-skills-mcp-builder` (公式からの配布)
 - **例**: `org-internal-security-audit` (組織内共通)
 - **例**: `3rdparty-awesome-tools-translator` (外部リポジトリ)
 
-- **Pickup**: 大規模な `officials/` から必要なものだけをプロジェクトにコピー。
-- **Share**: 便利なスキルを `org/` や `3rdparty/` に集約し、チームやコミュニティ間で再利用可能。
-- **Auto-Sync**: 実体を一箇所修正すれば、リンクを介してすべてのエージェントに即座に反映されます。
-
-ご利用のプロジェクトでも、このシンボリックリンク構造を自動設定する仕組みを提供します。
-
-## 利用方法
-### 🚀 セットアップ (Getting Started)
-このリポジトリは外部の公式リポジトリをサブモジュールとして参照しているため、--recursive オプションを使用したクローンが必要です。
-
-### プロジェクトごとにskillsを管理する場合
-
-```text
-{your-project}
-├── .agents/
-│   └── skills/              # エージェント用スキル (シンボリックリンク)
-│       └── {picked-skill}/
-├── .claude/
-│   └── skills/          # .skills/ へのシンボリックリンク
-├── .skills/             # スキル定義の実体
-│   └── {picked-skill}/
-└── {your-files}
-```
+## 🚀 セットアップ (Getting Started)
+このリポジトリは外部の公式リポジトリをサブモジュールとして参照しているため、`--recursive` オプションを使用したクローンが必要です。

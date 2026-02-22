@@ -4,8 +4,17 @@ import argparse
 from pathlib import Path
 
 def import_skill(source_path, target_repo_path, skill_name):
-    # Determine paths
-    neutral_skills_dir = Path(target_repo_path) / ".skills"
+    # Security: Ensure paths are resolved and validated
+    source_path = Path(source_path).resolve()
+    target_repo_path = Path(target_repo_path).resolve()
+    
+    # 1. Ensure source is not inside target's system paths
+    if str(target_repo_path) in str(source_path) and ".skills" not in str(source_path):
+         print(f"Error: Source path cannot be inside the target repository's working area (except .skills).")
+         return False
+
+    # 2. Determine paths
+    neutral_skills_dir = target_repo_path / ".skills"
     claude_skills_dir = Path(target_repo_path) / ".claude" / "skills"
     agents_skills_dir = Path(target_repo_path) / ".agents" / "skills"
     
@@ -36,9 +45,25 @@ def import_skill(source_path, target_repo_path, skill_name):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Import a skill from .officials to a project repo with symlink.")
-    parser.add_argument("--source", required=True, help="Source path of the skill in .officials")
+    parser.add_argument("--source", required=True, help="Source path of the skill (absolute or relative to SKILL_MANAGER_ROOT)")
     parser.add_argument("--repo", required=True, help="Target repository root path")
     parser.add_argument("--name", required=True, help="Name of the skill to be created")
     
     args = parser.parse_args()
-    import_skill(args.source, args.repo, args.name)
+    
+    # Resolve source path using environment variable if not absolute
+    source_path = Path(args.source)
+    if not source_path.is_absolute():
+        hub_root = os.environ.get("SKILL_MANAGER_ROOT")
+        if hub_root:
+            source_path = Path(hub_root) / args.source
+            print(f"Resolving source relative to SKILL_MANAGER_ROOT: {source_path}")
+        else:
+            # Fallback to current directory relative if no environment variable
+            source_path = source_path.resolve()
+            
+    if not source_path.exists():
+        print(f"Error: Source path does not exist: {source_path}")
+        exit(1)
+        
+    import_skill(source_path, args.repo, args.name)

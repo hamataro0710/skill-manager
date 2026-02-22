@@ -1,75 +1,78 @@
 # Skill-Manager
 
-**組織内の複数AIエージェントの管理を共通化し、公式・社内スキルの配布とメンテナンスを効率化するための管理フレームワーク**
+**組織全体の AI エージェント資産（スキル、ツール、設定）を統合し、公式および社内スキルの配布とメンテナンスを効率化するための管理フレームワーク。**
 
-## 🌟 ビジョン (Vision)
+## 🌟 ビジョン
 
-AI開発の速度は凄まじく、個人の努力だけで最新のスキル定義やツールセットに追従し続けることは困難になりつつあります。また、ユーザーごとに好みのAIエージェント（Gemini, Claude, Codex等）は異なりますが、それぞれが要求する微細なディレクトリ構造やパスの違いが、資産の再利用を妨げる壁となっています。
+`Skill-Manager` は、各種 AI エージェント（Gemini, Claude, Codex など）が要求するディレクトリ構造やパスの微妙な違いを吸収し、**「ユーザーが好みのエージェントを使いながら、組織のナレッジ（スキル）をシームレスに共有・再利用できる」**環境を提供します。
 
-`Skill-Manager` は、これらの差異を抽象化して吸収し、**「個人の好みのエージェントを使い分けつつ、組織の知見をシームレスに共有・再利用できる環境」**を提供します。
+## 🏗️ アーキテクチャ: 並列接続モデル
 
-### 核心となる価値
-1.  **Anti-Fragmentation (断片化の防止)**: エージェントごとの微細なパスの違い（`.agents/`, `.claude/`等）をシンボリックリンク層で吸収し、一つのスキル定義をあらゆるエージェントで使い回せるようにします。
-2.  **Maintenance-First Architecture (メンテナンス重視の構成)**: 複雑なツールやUIを提供することよりも、「どのスキルが信頼できるか」「どう維持管理するか」という構造（Architecture）の提供を優先します。
-3.  **Collaborative Defense (組織による追従)**: 公式リポジトリ（Google, Anthropic, OpenAI等）をサブモジュールとして統合し、セキュリティ懸念のない「認定済み公式資産」をチームで効率的に選定（Pickup）できる状態を維持します。
+`Skill-Manager` は、並列なディレクトリ構造を通じて、ローカルプロジェクトとグローバルな資産リポジトリ（ハブ）を接続します。**Asset Consultant** は、ハブとプロジェクトの双方に配備され、アセットやリソースの管理と同期を担います。
 
-## 📂 ディレクトリ構成 (Structure)
+![Architecture Overview](docs/architecture-overview.drawio.png)
 
-```text
-.
-├── core/                # [実体] Skill-Manager 自体のコア資産 (Tools, Skills, etc.)
-│   ├── skills/          # 組み込みスキルの実体 (asset-consultant)
-│   ├── tools/           # 管理用スクリプトの実体
-│   └── blueprints/      # 各プロジェクト用設定の雛形
-├── .skills/             # [実体] プロジェクトで Pickup したスキルの実体
-├── tools/               # core/tools へのシンボリックリンク
-├── .agents/skills/      # Gemini CLI 用窓口 (../.skills へのリンク)
-├── .claude/skills/      # Claude Code 用窓口 (../.skills へのリンク)
-├── org/skills/          # 組織内 (社内・チーム内) で共通利用・配布するスキル
-├── 3rdparty/{repo}/     # サードパーティの各リポジトリ (Git Submodules 等)
-├── officials/           # 各社の公式リポジトリ (Git Submodules)
-└── README.md
-```
+### 🧠 コア・コンセプト
 
-## 🚀 ロードマップ (Roadmap)
-- [ ] **Personality Extension**: 特定の役割（人格）を持つ Sub-agent の定義を共通化し、配布可能にする。
-- [ ] **Skill Discovery**: 膨大な公式スキル群から、用途に最適なものをより容易に選定できる仕組みの強化。
-- [ ] **Organizational Templates**: `org/skills/` 配下で、社内標準のプロンプトや命名規則を自動適用するテンプレート。
+- **並列ディレクトリ構造**: グローバルハブとターゲットプロジェクトは、ファイルシステム上で並列に配置され、相互に連携します。
+- **Asset Consultant の同期**: ハブとプロジェクトの双方に配備された `Asset Consultant` が、共通のインデックスとローカルの文脈を同期します。
+- **オンデマンドなインポート**: 必要なスキルのみをハブのレジストリからプロジェクトの `.skills/` ディレクトリへ選択的に導入します。
+- **自動化されたガバナンス**: `Agent Governor` がアセットインデックスと配備状況を常時監査し、整合性を維持します。
 
-## ✨ 組織導入のメリット
-- **シングル・ソース・オブ・トゥルース**: スキルの実体はすべて中立的な `.skills/` で管理され、各エージェント（`.agents/`, `.claude/`）からはリンクを貼るだけです。
-- **指示書の一元化**: `AGENTS.md` や `CLAUDE.md` を `PROJECT_RULES.md` へのリンクにすることで、エージェントを問わず一貫した振る舞いを保証します。
-- **ポータビリティ**: `org/skills/` に定義された社内共通ツールは、どのプロジェクトでも同じコマンドで即座に導入可能です。
+### 📂 ディレクトリ構成イメージ (Mental Model)
 
-
-## 🏷️ スキル命名規則 (Naming Convention)
-組織全体でスキルの衝突を避け、出自を明確にするために、以下の形式で管理することを推奨しています。
-`{source}-{repo_name}-{skill_name}`
-
-- **例**: `official-skills-anthropic-mcp-builder` (公式からの配布)
-- **例**: `org-internal-security-audit` (組織内共通)
-- **例**: `3rdparty-awesome-tools-translator` (外部リポジトリ)
-
-## 🚀 セットアップ (Getting Started)
-このリポジトリは外部の公式リポジトリをサブモジュールとして参照しているため、`--recursive` オプションを使用したクローンが必要です。
-
-### 導入後のプロジェクト構成例
-`tools/setup-project.py` を実行すると、ターゲットとなるプロジェクトは以下のような構成になり、単一のスキル実体を複数のエージェントから参照できるようになります。
-**一元管理のセットアップ:**
-```bash
-python tools/setup-project.py --repo {your-project-path} --name "My Project"
-```
+グローバルハブとローカルプロジェクトの関係：
 
 ```text
-{your-project}
-├── PROJECT_RULES.md         # [実体] 全エージェント共通のルール
-├── AGENTS.md                # PROJECT_RULES.md へのリンク
-├── CLAUDE.md                # PROJECT_RULES.md へのリンク
-├── .skills/                 # [実体] スキル定義（ここを編集すると全エージェントに反映）
-│   └── {picked-skill}/
-├── .agents/
-│   └── skills/              # .skills/ へのリンク
-├── .claude/
-│   └── skills/              # .skills/ へのリンク
-└── {your-files}
+{path}/{to}/{parent}/
+├── skill-manager/                # 【Global Hub / Source】
+│   ├── .skills/                  #
+│   │   ├── ASSET_INDEX.md        # AIが資産を発見するためのマスターカタログ
+│   │   └── core-asset-consultant/# 知的な架け橋（ソース）の実体
+│   ├── core/
+│   │   └── tools/                # デプロイツール (import_skill.py, setup_project.py)
+│   ├── officials/                # Google, Anthropic 等の公式スキル
+│   └── org/                      # 社内共通スキル
+│
+└── my-target-project/            # 【Local Work / Destination】
+    ├── .env                      # SKILL_MANAGER_ROOT={hubの絶対パス} を保持
+    ├── PROJECT_RULES.md          # プロジェクト固有の共通ルール
+    ├── AGENTS.md                 # 🔗 PROJECT_RULES.md へのリンク
+    ├── CLAUDE.md                 # 🔗 PROJECT_RULES.md へのリンク
+    ├── .skills/                  # インポートされたスキルの実体
+    │   └── core-asset-consultant/ # 現場に常駐する「知的な架け橋」
+    ├── .agents/skills/           # 🔗 .skills/ へのリンク (Gemini用)
+    └── .claude/skills/           # 🔗 .skills/ へのリンク (Claude用)
 ```
+
+## 🚀 はじめかた (Bootstrap Workflow)
+
+`skill-manager` ディレクトリから、わずか 2 ステップでターゲットプロジェクトをセットアップできます。
+
+1.  **ハブの準備**:
+    ```bash
+    git clone --recursive {this-repo-url}
+    cd skill-manager
+    python3 core/tools/scan_assets.py
+    ```
+
+2.  **ターゲットプロジェクトの初期化**:
+    ```bash
+    python3 core/tools/setup_project.py --repo {your-target-project-path} --name "My Project"
+    ```
+    *これにより、`.env` の構成、ディレクトリ構造の作成、および `Asset Consultant` のデプロイが自動的に行われます。*
+
+## ✨ コア・バリュー
+1.  **脱・断片化 (Anti-Fragmentation)**: シンボリックリンク層により、エージェントごとのパスの違いを吸収。
+2.  **メンテナンス優先 (Maintenance-First)**: 複雑な UI よりも「どのスキルが信頼できるか」「どう維持するか」の構造を重視。
+3.  **共同防御 (Collaborative Defense)**: 各社の公式リポジトリをサブモジュールとして統合し、安全な資産のみをピックアップ可能。
+
+## 🚀 ロードマップ
+- [x] **ブリッジ・アーキテクチャ**: グローバルハブとローカルプロジェクトの動的連携。
+- [x] **自動導入フロー**: 単一コマンドによるターゲットプロジェクトのセットアップ。
+- [ ] **診断モード (Diagnostic)**: `asset-consultant` による不足能力の自動スキャンと提案の強化。
+- [ ] **グローバル同期**: `ACTIVE_ASSETS.md` を通じた複数プロジェクト間の能力の可視化。
+
+## 🏷️ スキル命名規則
+衝突を避け、出所を明確にするため以下の形式を推奨します：
+`{source}-{repo_name}-{skill_name}` (例: `official-skills-anthropic-pdf-reader`)

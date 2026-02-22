@@ -17,11 +17,12 @@ Before any audit, ensure the AI's "eyes" are fresh.
 ### 2. Audit Deployment (Active Assets)
 Examine the `.skills/` directory to see what is actually deployed.
 - **Action**: List all entities in `.skills/`.
-- **Rationale**: Update **`.skills/ACTIVE_ASSETS.md`** with the role and rationale for each asset in the current project context.
+- **Mandatory Sync**: Update **`.skills/ACTIVE_ASSETS.md`** with the role and rationale for each asset, and **ensure it is 1:1 synchronized with the Mermaid diagram.** Fix any discrepancies immediately.
 
 ### 3. Visualize & Record
 Ensure the relationship between Orchestrators, Tools, and Expertise is clear.
 - **Action**: Use Mermaid diagrams in `.skills/ACTIVE_ASSETS.md` to map the capability flow.
+- **Design Principle**: Don't just list tools; describe functional dependencies (e.g., Nav -> DocCo).
 
 ## 📂 Managed Files (within .skills/)
 - **`ASSET_INDEX.md`**: The full catalog of potential assets.

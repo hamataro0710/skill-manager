@@ -19,31 +19,13 @@
 - **オンデマンドなインポート**: 必要なスキルのみをハブのレジストリからプロジェクトの `.skills/` ディレクトリへ選択的に導入します。
 - **自動化されたガバナンス**: `Agent Governor` がアセットインデックスと配備状況を常時監査し、整合性を維持します。
 
-### 📂 ディレクトリ構成イメージ (Mental Model)
+### 📂 ディレクトリ構成 (論理コンセプト)
 
-グローバルハブとローカルプロジェクトの関係：
+`Skill-Manager` は共通資産とプロジェクト固有の作業を明確に分離します：
+- **グローバルハブ**: スキル（公式、社内、サードパーティ）の中央リポジトリ。
+- **ターゲットプロジェクト**: 必要なスキルのみをインポートするローカルワークスペース。
 
-```text
-{path}/{to}/{parent}/
-├── skill-manager/                # 【Global Hub / Source】
-│   ├── .skills/                  #
-│   │   ├── ASSET_INDEX.md        # AIが資産を発見するためのマスターカタログ
-│   │   └── core-asset-consultant/# 知的な架け橋（ソース）の実体
-│   ├── core/
-│   │   └── tools/                # デプロイツール (import_skill.py, setup_project.py)
-│   ├── officials/                # Google, Anthropic 等の公式スキル
-│   └── org/                      # 社内共通スキル
-│
-└── my-target-project/            # 【Local Work / Destination】
-    ├── .env                      # SKILL_MANAGER_ROOT={hubの絶対パス} を保持
-    ├── PROJECT_RULES.md          # プロジェクト固有の共通ルール
-    ├── AGENTS.md                 # 🔗 PROJECT_RULES.md へのリンク
-    ├── CLAUDE.md                 # 🔗 PROJECT_RULES.md へのリンク
-    ├── .skills/                  # インポートされたスキルの実体
-    │   └── core-asset-consultant/ # 現場に常駐する「知的な架け橋」
-    ├── .agents/skills/           # 🔗 .skills/ へのリンク (Gemini用)
-    └── .claude/skills/           # 🔗 .skills/ へのリンク (Claude用)
-```
+物理的なディレクトリ構造や「ブリッジリンクモデル」の詳細については、**[アーキテクチャ設計と戦略 (docs/architectural-design.md)](docs/architectural-design.md)** を参照してください。
 
 ## 🚀 はじめかた (Bootstrap Workflow)
 
@@ -67,11 +49,13 @@
 2.  **メンテナンス優先 (Maintenance-First)**: 複雑な UI よりも「どのスキルが信頼できるか」「どう維持するか」の構造を重視。
 3.  **共同防御 (Collaborative Defense)**: 各社の公式リポジトリをサブモジュールとして統合し、安全な資産のみをピックアップ可能。
 
-## 🚀 ロードマップ
+## 🛠️ ロードマップ
+詳細なタスクリストと現在の進捗については、**[todos.md](todos.md)** を参照してください。
+
 - [x] **ブリッジ・アーキテクチャ**: グローバルハブとローカルプロジェクトの動的連携。
 - [x] **自動導入フロー**: 単一コマンドによるターゲットプロジェクトのセットアップ。
-- [ ] **診断モード (Diagnostic)**: `asset-consultant` による不足能力の自動スキャンと提案の強化。
-- [ ] **グローバル同期**: `ACTIVE_ASSETS.md` を通じた複数プロジェクト間の能力の可視化。
+- [ ] **診断モード (Diagnostic)**: `Asset Consultant` による不足能力の自動提案。
+- [ ] **グローバル同期**: 複数プロジェクト間の能力の可視化。
 
 ## 🏷️ スキル命名規則
 衝突を避け、出所を明確にするため以下の形式を推奨します：

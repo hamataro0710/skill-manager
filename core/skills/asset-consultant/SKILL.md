@@ -1,7 +1,16 @@
 ---
 name: asset-consultant
-description: Provides strategic advice on selecting and composing agent assets (Skills, Tools, Agents). Always translates project needs into specific asset combinations and import commands.
+description: Provides strategic advice on selecting and composing agent assets. Acts as a 'Common Foundation' asset for setup and capability expansion across all lifecycle phases.
 ---
+
+# 🤝 Asset Consultant (Strategic Guidance)
+
+## ⚙️ Workflow Integration (Foundation/Setup)
+
+| Layer | Role of Asset Consultant | Primary User |
+| :--- | :--- | :--- |
+| **Foundation** | The primary interface for discovery, design, and importing new assets into the project. | **Implementation** |
+| **Evolution** | Translates new requirements into specific asset combinations and import commands. | **Implementation** |
 
 # 🤝 Asset Consultant (Strategic Guidance)
 

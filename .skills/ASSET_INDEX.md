@@ -239,6 +239,6 @@ This index is automatically generated for AI discovery.
 | mcp-postgres | mcp-tool | `3rdparty/mcp-smithery/postgres` | MCP tool detected: postgres |
 | mcp-github | mcp-tool | `3rdparty/mcp-smithery/github` | MCP tool detected: github |
 | mcp-weather | mcp-tool | `3rdparty/mcp-smithery/weather` | MCP tool detected: weather |
-| agent-governor | skill | `core/skills/agent-governor` | Orchestrates agentic governance by synchronizing the asset index and visualizing active capabilities via .skills/ACTIVE_ASSETS.md. Use this to maintain the AI's "eyes" and audit the project's agentic ecosystem. |
+| agent-governor | skill | `core/skills/agent-governor` | Orchestrates agentic governance by mapping assets to a 3-layer lifecycle structure (Workflow Phase, Specialist Skills, Common Foundation). Acts as the 'Process Lead' to ensure the Capability Map (ACTIVE_ASSETS.md) accurately reflects the project's strategic and execution layers. |
 | plan-navigator | skill | `core/skills/plan-navigator` | Provides a logical compass for the AI's "Plan mode," preventing superficial answers and guiding toward essential solutions. |
-| asset-consultant | skill | `core/skills/asset-consultant` | Provides strategic advice on selecting and composing agent assets (Skills, Tools, Agents). Always translates project needs into specific asset combinations and import commands. |
+| asset-consultant | skill | `core/skills/asset-consultant` | Provides strategic advice on selecting and composing agent assets. Acts as a 'Common Foundation' asset for setup and capability expansion across all lifecycle phases. |

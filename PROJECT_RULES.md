@@ -26,6 +26,11 @@ Agents must follow these guidelines:
 ### 4. Interoperability via Symbolic Links
 - When sharing the same file across multiple tools, use symbolic links (relative paths) instead of copies.
 
+### 5. Communication and Documentation
+- **Clear & Concise**: Avoid poetic or flowery language. Use plain and direct explanations.
+- **Selective Metaphors**: Use metaphors only when they significantly aid understanding of complex concepts (e.g., "Hub & Target", "Bridge").
+- **Consistency**: Use established terminology and avoid introducing synonyms that may cause confusion.
+
 ## 📂 Directory Roles
 - `core/`: **[Entity]** Core assets of Skill-Manager itself (tools, skills, templates).
   - `core/skills/`: Entities for built-in skills (e.g., `asset-consultant`, `plan-navigator`).

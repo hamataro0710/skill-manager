@@ -8,37 +8,9 @@
 2.  **Target Project (Destination)**: ユーザーの作業リポジトリ。必要な資産だけをインポートし、軽量かつ最新の状態で維持。
 3.  **Asset Consultant (The Bridge)**: 両方のコンテキストを把握し、現場に最適な資産をカタログから提案・デプロイする「知性」。
 
-#### 📂 相互作用と構造 (Mental Model)
+#### 📂 物理構造と知的な架け橋 (Physical Structure & Intelligence Bridge)
 
-```mermaid
-graph TD
-    subgraph SkillManager ["Skill-Manager (Global Hub / Source)"]
-        AI[ASSET_INDEX.md]
-        Registry["officials/ / 3rdparty/ / org/ / core/"]
-        Tools[Core Tools: import_skill.py, setup_project.py]
-    end
-
-    subgraph TargetProject ["Target Project (Local Work / Destination)"]
-        PR[PROJECT_RULES.md]
-        Interface[".agents/ .claude/ (Symlinks)"]
-        
-        subgraph LocalSkills [".skills/ (Skill Entities)"]
-            AC["Asset Consultant (The Bridge)"]
-            OtherSkills["Other Skills (e.g. pdf-reader)"]
-        end
-    end
-
-    %% Interactions
-    AC -- "1. Context Sensing" --> TargetProject
-    AC -- "2. Global Discovery" --> AI
-    AI -- "3. Asset Lookup" --> Registry
-    AC -- "4. Trigger Import" --> Tools
-    Tools -- "5. Deploy & Link" --> LocalSkills
-    
-    %% Internal Links
-    LocalSkills -.-> Interface
-    PR -.-> Interface
-```
+このプロジェクトは、共通資産を管理する「倉庫（Hub）」と、個別の開発を行う「現場（Target）」を物理的に分離しつつ、論理的に接続します。
 
 ```text
 {path}/{to}/{parent}/
@@ -49,23 +21,26 @@ graph TD
 │   │       └── SKILL.md          # 「故郷(Hub)と作業場(Target)の両方を見ろ」という命令書
 │   ├── core/
 │   │   └── tools/                #
-│   │       ├── import-skill.py   # HubからTargetへコピーするツール
-│   │       └── setup-project.py  # Targetの基本構造を整えるツール
-│   ├── officials/                # 各社の公式スキル（マスター）
-│   └── org/                      # 自社共通スキル（マスター）
+│   │       ├── import_skill.py   # HubからTargetへコピーするツール
+│   │       └── setup_project.py  # Targetの基本構造を整えるツール
+│   ├── officials/                # 各社の公式スキル（マスター：git submodule 等）
+│   ├── org/                      # 自社共通スキル（マスター）
+│   └── 3rdparty/                 # 外部オープンソーススキル
 │
 └── my-target-project/            # 【Local Work / Destination】
+    ├── .env                      # SKILL_MANAGER_ROOT={Hubの絶対パス} を保持
     ├── PROJECT_RULES.md          # このプロジェクト固有の基本ルール
     ├── AGENTS.md                 # 🔗 PROJECT_RULES.md へのリンク
     ├── CLAUDE.md                 # 🔗 PROJECT_RULES.md へのリンク
     │
     ├── .skills/                  # 【実体：インポートされた資産】
+    │   ├── ACTIVE_ASSETS.md      # この現場で「何が動いているか」の可視化
     │   ├── core-asset-consultant/# ★現場に常駐するコンサルタントの実体
     │   │   └── SKILL.md          # 「Hubを見に行け」という命令が含まれている
     │   └── official-pdf-reader/  # Hubからインポートされた他のスキル
     │
     ├── .agents/                  # Gemini用インターフェース
-    │   └── skills/               # 🔗 ../.skills へのリンク（ここでACを認識）
+    │   └── skills/               # 🔗 ../.skills へのリンク
     │
     └── .claude/                  # Claude用インターフェース
         └── skills/               # 🔗 ../.skills へのリンク
@@ -87,21 +62,20 @@ graph TD
 
 ---
 
-## 🛠️ TODO / Roadmap
+## 🛠️ ロードマップ (Roadmap)
+詳細なタスク管理は `todos.md` で行います。
 
-### Phase 1: 接続基盤の構築 (Connectivity)
-- [ ] **`setup-project.py` の拡張**: ターゲットプロジェクトに `SKILL_MANAGER_PATH` を含む `.env` または設定ファイルを生成する機能の追加。
-- [ ] **環境変数の読み込み**: 各ツール（`import-skill.py` 等）が、自身の場所ではなく環境変数から Hub を特定できるように修正。
+### Phase 1: 接続基盤の構築 (Connectivity) - **[Completed]**
+- Hub と Target の物理的な分離と `.env` によるパス解決の確立。
+- エージェント用インターフェース（`.agents/`, `.claude/`）のシンボリックリンク構造。
 
-### Phase 2: 知性の強化 (Consultant Intelligence)
-- [ ] **`asset-consultant` プロンプトの更新**:
-    -   「カタログは `SKILL_MANAGER_PATH/ASSET_INDEX.md` から読み取れ」という命令の追加。
-    -   ターゲットプロジェクトの `package.json` や `requirements.txt` を読み取って状況判断する命令の追加。
-- [ ] **`scan-assets.py` の汎用化**: 任意のディレクトリを対象に資産・状況をスキャンできる引数の追加。
+### Phase 2: 知性の強化 (Consultant Intelligence) - **[In Progress]**
+- `Asset Consultant` による環境適応プロトコルの実装。
+- `scan_assets.py` による診断機能の強化。
 
-### Phase 3: 体験の磨き込み (User Experience)
-- [ ] **`docs/architecture-overview.drawio.png` の生成**: XMLから画像を書き出し、READMEに配置。
-- [ ] **インポート履歴の管理**: どのプロジェクトに何をデプロイしたかを Hub 側で把握する `ACTIVE_ASSETS.md` のグローバル同期。
+### Phase 3: 運用のガバナンス (Governance & UI) - **[Planned]**
+- `ACTIVE_ASSETS.md` による配備状況の可視化。
+- `GLOBAL_ACTIVE_MAP.md` による複数プロジェクトの統合管理。
 
 ---
 

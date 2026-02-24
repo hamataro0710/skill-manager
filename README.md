@@ -19,31 +19,13 @@
 - **On-Demand Importing**: Skills are selectively imported from the Hub's registry into the project's `.skills/` directory as needed.
 - **Automated Governance**: The `Agent Governor` continuously audits the asset index and active deployments to ensure system integrity.
 
-### 📂 Directory Structure (The Physical Bridge)
+### 📂 Directory Structure (Logical Concept)
 
-The relation between the Global Hub and your Local Project:
+`Skill-Manager` maintains a clear separation between common assets and project-specific work:
+- **Global Hub**: A central repository of skills (officials, internal, and 3rd-party).
+- **Target Project**: Your local workspace that imports only the necessary skills.
 
-```text
-{path}/{to}/{parent}/
-├── skill-manager/                # 【Global Hub / Source】
-│   ├── .skills/                  #
-│   │   ├── ASSET_INDEX.md        # Master catalog for AI discovery
-│   │   └── core-asset-consultant/# Intelligence Bridge (Source)
-│   ├── core/
-│   │   └── tools/                # Deployment tools (import_skill.py, setup_project.py)
-│   ├── officials/                # Official skills from Google, Anthropic, etc.
-│   └── org/                      # Internal common skills
-│
-└── my-target-project/            # 【Local Work / Destination】
-    ├── .env                      # Contains SKILL_MANAGER_ROOT={absolute-hub-path}
-    ├── PROJECT_RULES.md          # Project-specific common rules
-    ├── AGENTS.md                 # 🔗 Link to PROJECT_RULES.md
-    ├── CLAUDE.md                 # 🔗 Link to PROJECT_RULES.md
-    ├── .skills/                  # Imported skill entities
-    │   └── core-asset-consultant/ # The resident Intelligence Bridge
-    ├── .agents/skills/           # 🔗 Link to .skills/ (for Gemini)
-    └── .claude/skills/           # 🔗 Link to .skills/ (for Claude)
-```
+For a detailed physical directory structure and the "Bridge-Link Model" explanation, please refer to **[Architectural Design & Strategy](docs/architectural-design.md)**.
 
 ## 🚀 Getting Started (Bootstrap Workflow)
 
@@ -68,10 +50,12 @@ You can set up a target project in two steps from the `skill-manager` directory:
 3.  **Collaborative Defense**: Curates certified official assets (Google, Anthropic, etc.) as submodules.
 
 ## 🛠️ Roadmap
+For a detailed task list and current progress, please see **[todos.md](todos.md)**.
+
 - [x] **Bridge Architecture**: Dynamic link between Global Hub and Local Projects.
 - [x] **Auto-Bootstrap**: Single-command setup for target projects.
-- [ ] **Diagnostic Mode**: Strengthening `asset-consultant` to scan and suggest missing capabilities.
-- [ ] **Global Sync**: Visualizing active capabilities across multiple projects via `ACTIVE_ASSETS.md`.
+- [ ] **Diagnostic Mode**: Suggest missing capabilities via `Asset Consultant`.
+- [ ] **Global Sync**: Visualize active capabilities across projects.
 
 ## 🏷️ Skill Naming Convention
 `{source}-{repo_name}-{skill_name}` (e.g., `official-skills-anthropic-pdf-reader`)

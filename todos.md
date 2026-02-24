@@ -39,12 +39,43 @@
   - どのプロジェクトにどの資産を配備したかを Hub 側でも追跡・可視化できる仕組みの構築。
 
 ### 【P4】仕上げ (Polishing)
+- [x] **P4-0: ドキュメント構造の最適化 (Docs Refactoring)**
+  - `README.md` を入口に、`architectural-design.md` を技術詳細に、`todos.md` をタスクの単一光源 (SSOT) に整理。
 - [ ] **P4-1: アーキテクチャ図の画像化と README 反映**
-  - `docs/architecture-overview.drawio` を PNG 出力し、README に埋め込む。
+  - `docs/architecture-overview.drawio` を PNG 出力し、最新の状態を README に反映（必要に応じて）。
+
+---
+
+## 📚 Document Organization & Table of Contents
+
+プロジェクトのドキュメント構造を整理し、ユーザーと AI が迷わず情報を取得できる構成を維持します。
+
+| Layer | Document | Role / Content |
+| :--- | :--- | :--- |
+| **1. Entry** | `README.md` / `_ja.md` | **入口**: 概要、Mirror & Bridge モデル、コア・コンセプト、クイックスタート。 |
+| **2. Capability** | `FEATURES.md` / `_ja.md` | **機能**: User Story Map の基礎。Epic/Story/Task レベルの機能一覧。 |
+| **3. Design** | `docs/architectural-design.md` | **詳細設計**: 3レイヤー構造、Bridge-Link Model、中長期ロードマップ。 |
+| | `docs/bootstrap-workflow.md` | **手順**: ターゲットプロジェクトの初期化と運用の詳細フロー。 |
+| **4. Live Map** | `.skills/ASSET_INDEX.md` | **カタログ**: 全アセット（Official, Org, 3rdparty）の自動生成マスターリスト。 |
+| | `.skills/ACTIVE_ASSETS.md` | **配備図**: 現在デプロイされているスキルの役割、依存関係、Mermaid による可視化。 |
+
+## 📊 Graph Architecture (Visualization Strategy)
+
+視覚的な理解を助けるため、用途に応じて 2 種類の図解を使い分けます。
+
+1. **architecture-overview.drawio (Mirror & Bridge モデル)**
+   - **配置**: `docs/` (PNG 参照: `README.md`)
+   - **目的**: 物理的なディレクトリ構造（Hub ↔ Target）と、`Asset Consultant` による知能のミラーリング（同期）を表現する。
+   - **更新**: アーキテクチャの根本的な変更時。
+
+2. **ACTIVE_ASSETS.md (Intelligence Flow)**
+   - **配置**: `.skills/` (各プロジェクト内)
+   - **目的**: デプロイ済みのスキル（Nav, Swarm, GitHub 等）が、プロジェクト内でどのように「戦略・実行・知識」として連携するかを表現する。
+   - **更新**: 新しいスキルがインポートまたは削除された時（Agent Governor が担当）。
 
 ---
 
 ## 📍 現在のステータス
-- **Completed**: 基盤構築 (P1) および 知能の自動配備 (P2)。
-- **Special Note**: ツール名を Python インポート互換のためハイフンからアンダースコアへ変更 (`setup_project.py`, `import_skill.py`, etc.)。
+- **Completed**: 基盤構築 (P1), 知能の自動配備 (P2), ドキュメント構造の最適化 (P4-0)。
+- **Special Note**: `README.md` と `architectural-design.md` の重複を排除し、情報の役割分担を明確化しました。
 - **Next Task**: `P3-1: scan_assets.py の診断モード追加`

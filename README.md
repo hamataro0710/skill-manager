@@ -1,10 +1,10 @@
 # Skill-Manager
 
-**A management framework for unifying AI agent assets (skills, tools, and configurations) across organizations, streamlining the distribution and maintenance of official and internal skills.**
+**A management framework for unifying AI agent assets (skills, tools, and configurations) across organizations, streamlining the synchronization, curation, and circulation of official and internal intelligence.**
 
 ## 🌟 Vision
 
-`Skill-Manager` abstracts and absorbs the subtle differences in directory structures and paths required by various AI agents (Gemini, Claude, Codex, etc.), providing an environment where **"users can use their preferred agent while seamlessly sharing and reusing organizational knowledge."**
+`Skill-Manager` abstracts the complexities of AI agent implementations, providing an environment where **"teams can use their preferred agents to access context-aware organizational knowledge while staying in sync with the latest AI evolution."**
 
 ## 🎯 Why Skill-Manager? (Jobs to be Done)
 

@@ -10,15 +10,19 @@
 
 Skill-Manager doesn't just manage files; it automates the "progress" of your AI agent workflows.
 
-1. **"Stay ahead of the AI evolution without the research fatigue."**
+1. **"Stay ahead via Ecosystem Sync (Stay Updated)"**
    - **Job:** Instantly inject the latest "best practices" (prompts, tool definitions, MCP configs, implementation patterns) from official sources (Google, Anthropic, etc.) into your local projects.
    - **Value:** Zero-effort sync with the fast-moving ecosystem. Your agent is always "up-to-date and at its smartest."
 
-2. **"Turn local breakthroughs into shared assets and break down knowledge silos."**
+2. **"Contextual Alignment & Diagnostics (Tailored Intelligence)"**
+   - **Job:** Let the AI analyze your tech stack and domain to suggest and auto-configure only the most relevant assets from the vast catalog.
+   - **Value:** Eliminates the "blank page" problem. Your agent starts with a deep understanding of *your* environment, rather than just being a generic assistant.
+
+3. **"Knowledge Circulation & Sharing (Break down Silos)"**
    - **Job:** Effortlessly share successful local patterns (prompts, tools, rules) with the entire organization, allowing other teams to benefit from your innovation instantly.
    - **Value:** Replaces "Knowledge Monopolies" with a "Shared Wisdom Loop." Ensures that a win in one project becomes a starting point for everyone else, maximizing the ROI of every internal development effort.
 
-3. **"Leverage the right agent for the right task without tool friction."**
+4. **"Agent Agility & Task-Specific Optimization (Anti Lock-in)"**
    - **Job:** Flexibly switch or combine multiple AI agents (Claude, Gemini, etc.) within a single project, utilizing each one's unique strengths without re-configuring your assets.
    - **Value:** Breaks agent lock-in. Your organizational knowledge and tools remain a constant foundation, even as you swap the underlying "brain" to match the specific requirements of the task.
 

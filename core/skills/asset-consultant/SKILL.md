@@ -1,66 +1,46 @@
 ---
 name: asset-consultant
-description: Provides strategic advice on selecting and composing agent assets. Acts as a 'Common Foundation' asset for setup and capability expansion across all lifecycle phases.
+description: Provides strategic advice on selecting, composing, and governing agent assets. Acts as the 'Process Lead' and 'Strategic Advisor' to ensure the Capability Map (ACTIVE_ASSETS.md) reflects the project's 3-layer lifecycle (Workflow Phase, Specialist Skills, Common Foundation).
 ---
 
-# 🤝 Asset Consultant (Strategic Guidance)
+# 🤝 Asset Consultant (Integrated)
 
-## ⚙️ Workflow Integration (Foundation/Setup)
+The Asset Consultant is the central authority for **Capability Expansion** and **Ecosystem Integrity**. It combines strategic asset selection with rigorous governance to maintain a high-performance agentic environment.
 
-| Layer | Role of Asset Consultant | Primary User |
-| :--- | :--- | :--- |
-| **Foundation** | The primary interface for discovery, design, and importing new assets into the project. | **Implementation** |
-| **Evolution** | Translates new requirements into specific asset combinations and import commands. | **Implementation** |
+## 🧭 Quick Reference
 
-# 🤝 Asset Consultant (Strategic Guidance)
+| Task | Primary Action / Guide |
+| :--- | :--- |
+| **Search/Select Assets** | Analyze requirements and match with `.skills/ASSET_INDEX.md`. |
+| **Import New Asset** | Execute `python core/tools/import_skill.py <name>`. |
+| **Update Capability Map** | Sync `.skills/ACTIVE_ASSETS.md` with the 3-layer matrix. |
+| **Audit Structure** | Validate alignment of Specialist Skills to Workflow Phases. |
 
-The Asset Consultant is a specialized advisor focused on **Capability Expansion**. Its sole purpose is to analyze the project's requirements and provide a concrete **Asset Composition Blueprint**.
+---
 
-## 📍 Environment Adaptation Protocol
-Before starting any consultation, you MUST resolve your context:
-1. **Locate the Hub (Global Catalog)**:
-   - Check the `SKILL_MANAGER_ROOT` environment variable (often in `.env`).
-   - The master catalog is located at `${SKILL_MANAGER_ROOT}/.skills/ASSET_INDEX.md`.
-2. **Locate the Target (Local Work)**:
-   - Your current working directory is the **Target Project**.
-   - Scan for `package.json`, `pyproject.toml`, or `requirements.txt` to identify the tech stack.
+## 🛠 Mandatory Protocols
 
-- **Definition of "Asset"**: A Skill, Tool (MCP server), or Orchestrator (Agent framework/logic).
-- **Core Mission**: Analyze requirements ONLY to select the optimal assets from `.skills/ASSET_INDEX.md`.
-- **Final Output**: Every consultation MUST end with specific `tools/import-skill.py` commands. Anything else is out of scope.
+### 1. Discovery & Selection (Consultant Mode)
+Follow the **Direct-to-Asset** workflow for any request to "add" or "find" capabilities:
+- **EE (EssenceExplore)**: Identify the "Needed Functions" (e.g., "GitHub access", "Persistence").
+- **CD (ChallengeDiscover)**: Scan project (tech stack) to determine constraints.
+- **AE (ApproachExplore)**: Propose asset combinations from `ASSET_INDEX.md`.
+- **Output**: Every consultation MUST end with specific import commands.
 
-## 🧭 Mandatory Protocol: "Direct-to-Asset" Workflow
+### 2. Mapping & Integrity (Governance Mode)
+Maintain the **`.skills/ACTIVE_ASSETS.md`** by mapping all active entities into three layers:
+- **Layer 1: Workflow Phase (Horizontal)**: e.g., Planning → Dev → Test → Deploy.
+- **Layer 2: Specialist Skills (Vertical)**: Phase-specific agents (e.g., `notion-spec`, `linear`).
+- **Layer 3: Common Foundation (Base)**: Cross-phase infrastructure (e.g., `plan-navigator`, `asset-consultant`).
 
-You MUST follow the `plan-navigator` flow, but every step must focus on **Asset Selection**.
+### 3. Visualization
+Update the Mermaid diagram in `ACTIVE_ASSETS.md` whenever the structure changes. Ensure that `asset-consultant` itself is always marked as a **Foundation** asset.
 
-### Phase 1: EE (EssenceExplore)
-- **Goal**: Identify the **Specific Capabilities** the user is lacking.
-- **Milestone**: Redefine the user's request as a set of "Needed Functions" (e.g., "Needs persistent memory" or "Needs GitHub access").
-- **Strict Boundary**: You are an expert in **Asset Selection**, not a general assistant. All analysis MUST converge into a specific selection of assets. Providing advice that does not result in a concrete Blueprint is a failure of this skill.
+## 📂 Managed Resources
+- **`.skills/ASSET_INDEX.md`**: The master catalog for discovery.
+- **`.skills/ACTIVE_ASSETS.md`**: The definitive matrix map of the project's intelligence.
+- **`core/tools/import_skill.py`**: The primary execution tool.
 
-### Phase 2: CD (ChallengeDiscover)
-- **Goal**: Context Sensing for **Asset Matching**.
-- **Action**: Scan project files to determine technical constraints (Language, Agent Type) that dictate which assets will work.
-- **Milestone**: List the **Missing Assets** required to reach the Essence defined in Phase 1.
-
-### Phase 3: CP (ChallengePrioritize)
-- **Goal**: Sequence the **Deployment**.
-- **Milestone**: Decide which asset to import first based on dependencies (e.g., "Import Orchestrator before Tools").
-
-### Phase 4: AE (ApproachExplore)
-- **Goal**: Generate **Composition Options**.
-- **Action**: Propose 3+ different combinations of Orchestrators, Tools, and Expertise.
-- **Constraint**: Every option must follow the format in `references/blueprint-format.md`.
-
-### Phase 5: AD (ApproachDecide)
-- **Goal**: Final Recommendation & **Execution**.
-- **Requirement**: You MUST end the consultation with a list of specific **`tools/import-skill.py`** commands.
-
-## 📝 Rules of Engagement
-1. **Always Produce Assets**: If you haven't suggested a specific asset from the `.skills/ASSET_INDEX.md`, the consultation is incomplete.
-2. **Context as Filter**: Use project context only to filter assets, not to give general project advice.
-3. **Rationale Over Rhetoric**: Explain the value of the **Composition**, not the general state of the project.
-
-## 📂 Key Resources
-- **[blueprint-format.md](references/blueprint-format.md)**: The schema for all proposals.
-- **.skills/ASSET_INDEX.md**: The source of all potential recommendations.
+## 📝 Best Practices
+- **Integrity First**: A skill without a clear placement in the 3-layer matrix is "unmanaged" and should be flagged for categorization.
+- **Context as Filter**: Use project context (language, frameworks) to filter recommended assets, not for general coding advice.

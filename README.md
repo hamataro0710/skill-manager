@@ -35,7 +35,7 @@ Skill-Manager doesn't just manage files; it automates the "progress" of your AI 
 ### 🧠 Core Concepts
 
 1. **Ecosystem Synchronization**: Curates certified official repositories (Google, Anthropic, etc.) as **submodules** and scans them as needed via `scan_assets.py`. It ensures you stay at the forefront of AI evolution without manual research.
-2. **Contextual Intelligence Mapping**: A collaboration between the **Asset Consultant** (Diagnosis) and **Agent Architect** (Structure). It filters the vast catalog to identify and configure assets that fit your specific tech stack and project phase.
+2. **Contextual Intelligence Mapping**: The **Asset Consultant** acts as both a strategic advisor (Diagnosis) and a process lead (Structure). It filters the vast catalog to identify, configure, and govern assets that fit your specific tech stack and project phase.
 3. **Verified Knowledge Circulation**: A bi-directional flow where local breakthroughs are mapped to organizational patterns and shared back to the Hub. It transforms individual wins into a "Living Foundation" for the whole team.
 4. **Agent-Agnostic Abstraction**: A symbolic link layer that maps agent-specific configurations (`.claude/`, `.agents/`, etc.) into a standardized structure. It allows you to swap "brains" (agents) while keeping your "tools" (skills) intact.
 5. **Bridge-Link Architecture**: A parallel directory structure connecting the Hub and Projects. It keeps individual projects lightweight by injecting only the necessary intelligence on-demand, ensuring instant synchronization across the organization.
@@ -68,8 +68,6 @@ You can set up a target project in two steps from the `skill-manager` directory:
 ## 🛠️ Roadmap
 For a detailed task list and current progress, please see **[todos.md](todos.md)**.
 
-- [x] **Bridge Architecture**: Dynamic link between Global Hub and Local Projects.
-- [x] **Auto-Bootstrap**: Single-command setup for target projects.
 - [ ] **Diagnostic Mode**: Suggest missing capabilities via `Asset Consultant`.
 - [ ] **Global Sync**: Visualize active capabilities across projects.
 

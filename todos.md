@@ -37,8 +37,8 @@
   - カタログ作成だけでなく、ターゲットプロジェクトの「現状（不足しているもの）」を診断する機能の追加。
 - [ ] **P3-2: `ACTIVE_ASSETS.md` のグローバル同期**
   - どのプロジェクトにどの資産を配備したかを Hub 側でも追跡・可視化できる仕組みの構築。
-- [ ] **P3-3: Intelligence Core の統合 (Consultant + Governor)**
-  - `agent-governor`（構造設計）の機能を `asset-consultant`（戦略提案）へ統合し、単一の知能コアへシンプル化。
+- [x] **P3-3: Intelligence Core の統合 (Consultant + Governance)**
+  - `agent-governor`（構造設計）の機能を `asset-consultant`（戦略提案）へ統合し、単独の知能コアへシンプル化。
   - プロジェクトの「フェーズ特定（マトリクス作成）」を診断（Diagnostic）の必須ステップとして定義し、提案精度を向上させる。
 
 ### 【P4】仕上げ (Polishing)
@@ -56,7 +56,7 @@
 | Layer | Document | Role / Content |
 | :--- | :--- | :--- |
 | **1. Entry** | `README.md` / `_ja.md` | **入口**: 概要、Mirror & Bridge モデル、コア・コンセプト、クイックスタート。 |
-| **2. Capability** | `FEATURES.md` / `_ja.md` | **機能**: User Story Map の基礎。Epic/Story/Task レベルの機能一覧。 |
+| **2. Capability** | `FEATURES.md` / `_ja.md` | **機能**: User Story Map の基礎。Epic/Story/Task レベル Benson 機能一覧。 |
 | **3. Design** | `docs/architectural-design.md` | **詳細設計**: 3レイヤー構造、Bridge-Link Model、中長期ロードマップ。 |
 | | `docs/bootstrap-workflow.md` | **手順**: ターゲットプロジェクトの初期化と運用の詳細フロー。 |
 | **4. Live Map** | `.skills/ASSET_INDEX.md` | **カタログ**: 全アセット（Official, Org, 3rdparty）の自動生成マスターリスト。 |
@@ -74,7 +74,7 @@
 2. **ACTIVE_ASSETS.md (Intelligence Flow)**
    - **配置**: `.skills/` (各プロジェクト内)
    - **目的**: デプロイ済みのスキル（Nav, Swarm, GitHub 等）が、プロジェクト内でどのように「戦略・実行・知識」として連携するかを表現する。
-   - **更新**: 新しいスキルがインポートまたは削除された時（Agent Governor が担当）。
+   - **更新**: 新しいスキルがインポートまたは削除された時（Asset Consultant が担当）。
 
 ---
 

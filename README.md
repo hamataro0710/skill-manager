@@ -34,10 +34,11 @@ Skill-Manager doesn't just manage files; it automates the "progress" of your AI 
 
 ### 🧠 Core Concepts
 
-- **Parallel Structure**: The Hub (source) and Target Project (work_dir) reside on the same filesystem level, linked via configuration.
-- **Dual-Resident Consultant**: The `Asset Consultant` operates in both environments, maintaining a synchronized view of global assets and local context.
-- **On-Demand Importing**: Skills are selectively imported from the Hub's registry into the project's `.skills/` directory as needed.
-- **Automated Governance**: The `Agent Governor` continuously audits the asset index and active deployments to ensure system integrity.
+1. **Ecosystem Synchronization**: Curates certified official repositories (Google, Anthropic, etc.) as **submodules** and scans them as needed via `scan_assets.py`. It ensures you stay at the forefront of AI evolution without manual research.
+2. **Contextual Intelligence Mapping**: A collaboration between the **Asset Consultant** (Diagnosis) and **Agent Architect** (Structure). It filters the vast catalog to identify and configure assets that fit your specific tech stack and project phase.
+3. **Verified Knowledge Circulation**: A bi-directional flow where local breakthroughs are mapped to organizational patterns and shared back to the Hub. It transforms individual wins into a "Living Foundation" for the whole team.
+4. **Agent-Agnostic Abstraction**: A symbolic link layer that maps agent-specific configurations (`.claude/`, `.agents/`, etc.) into a standardized structure. It allows you to swap "brains" (agents) while keeping your "tools" (skills) intact.
+5. **Bridge-Link Architecture**: A parallel directory structure connecting the Hub and Projects. It keeps individual projects lightweight by injecting only the necessary intelligence on-demand, ensuring instant synchronization across the organization.
 
 ### 📂 Directory Structure (Logical Concept)
 
@@ -63,11 +64,6 @@ You can set up a target project in two steps from the `skill-manager` directory:
     python3 core/tools/setup_project.py --repo {your-target-project-path} --name "My Project"
     ```
     *This will automatically configure `.env`, create the directory structure, and deploy the `Asset Consultant`.*
-
-## ✨ Core Values
-1.  **Anti-Fragmentation**: Absorbs subtle path differences through a symbolic link layer.
-2.  **Maintenance-First**: Prioritizes structure and trust over complex UIs.
-3.  **Collaborative Defense**: Curates certified official assets (Google, Anthropic, etc.) as submodules.
 
 ## 🛠️ Roadmap
 For a detailed task list and current progress, please see **[todos.md](todos.md)**.
